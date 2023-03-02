@@ -1,5 +1,8 @@
 const Poke_Api = 'https://pokeapi.co/api/v2/';
 const conteinerPokedex = document.querySelector('.conteiner-pokedex');
+const next = document.querySelector('.next');
+const previe = document.querySelector('.previe');
+let number = 20;
 
 
 async function GetFetchPokedex (id)  {
@@ -11,12 +14,12 @@ async function GetFetchPokedex (id)  {
     return [array]; 
 };
     
-async function pokemonId (number, limite) {
-    for ( i = 1; i <= number + limite; i++) {
+async function pokemonId (number) {
+    for ( i = 1; i <= number; i++) {
         const datos = await GetFetchPokedex(i);
         
         datos.map(element => {
-            console.log(element)
+            console.log(element);
             createCardsPokemons(element);
         });
     }
@@ -30,9 +33,9 @@ function createCardsPokemons (datos) {
     const conteinerInfo = document.createElement('div');
     const figureCard = document.createElement('figure');
     const imgCard = document.createElement('img');
-    const name = document.createElement('h3');
+    const name = document.createElement('h5');
     name.classList.add('nameCards')
-    const number = document.createElement('h4');
+    const number = document.createElement('h3');
     number.classList.add('number')
     const type = document.createElement('p');
     type.classList.add('type')
@@ -59,7 +62,22 @@ function createCardsPokemons (datos) {
 };
 
 
+
 document.addEventListener('DOMContentLoaded', ()=> {
-    pokemonId(1, 19);
+    pokemonId(number);
+    previe.addEventListener('click', ()=> {
+        conteinerPokedex.textContent = ''
+        if (number < !20) {
+            number = number - 19;
+        } 
+        return pokemonId(number);
+    });
+    next.addEventListener('click', ()=> {
+        conteinerPokedex.textContent = ''
+        if (!number <= 1) {
+            number = number + 19;
+        } 
+        return pokemonId(number);
+    })
 })
 
