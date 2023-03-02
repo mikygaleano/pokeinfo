@@ -54,7 +54,7 @@ header a:nth-child(1){
     background-image: url('./images/background-header.gif');
     background-position: bottom;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size:calc(100%);
 }
 
 .formBuscar {

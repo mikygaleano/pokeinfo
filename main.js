@@ -3,6 +3,7 @@ const conteinerPokedex = document.querySelector('.conteiner-pokedex');
 const next = document.querySelector('.next');
 const previe = document.querySelector('.previe');
 const btnBuscar = document.getElementById('buscar');
+const formBuscar = document.getElementById('formBuscar');
 let limite = 19;
 let offSet = 1;
 
@@ -26,15 +27,18 @@ async function pokemonId (limite, offSet) {
     }
 };
 async function buscarPokemon() {
+    formBuscar.addEventListener("submit", (event) => {
+        event.preventDefault();
+      });
     btnBuscar.addEventListener('change', async () => {
-      const searchTerm = btnBuscar.value.toLowerCase();
-      const searchTerms = searchTerm.split(" ");
-      conteinerPokedex.textContent = '';
-      for (const term of searchTerms) {
-        const datos = await GetFetchPokedex(term);
-        console.log(datos)
-        datos.map(element => {
-            createCardsPokemons(element);
+        const searchTerm = btnBuscar.value.trim().toLowerCase();
+        const searchTerms = searchTerm.split(" ");
+        conteinerPokedex.textContent = '';
+        for (const term of searchTerms) {
+            const datos = await GetFetchPokedex(term);
+            console.log(datos)
+            datos.map(element => {
+                createCardsPokemons(element);
         });        
       }
     });
