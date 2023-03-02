@@ -59,6 +59,7 @@ function createCardsPokemons (datos) {
 };
 
 
+document.addEventListener('DOMContentLoaded', ()=> {
+    pokemonId(1, 19);
+})
 
-
-pokemonId(1, 19);
