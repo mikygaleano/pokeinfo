@@ -2,6 +2,7 @@ const Poke_Api = 'https://pokeapi.co/api/v2/';
 const conteinerPokedex = document.querySelector('.conteiner-pokedex');
 const next = document.querySelector('.next');
 const previe = document.querySelector('.previe');
+const btnBuscar = document.getElementById('buscar');
 let limite = 19;
 let offSet = 1;
 
@@ -20,11 +21,24 @@ async function pokemonId (limite, offSet) {
         const datos = await GetFetchPokedex(i);
         
         datos.map(element => {
-            console.log(element);
             createCardsPokemons(element);
         });
     }
-}
+};
+async function buscarPokemon() {
+    btnBuscar.addEventListener('change', async () => {
+      const searchTerm = btnBuscar.value.toLowerCase();
+      const searchTerms = searchTerm.split(" ");
+      conteinerPokedex.textContent = '';
+      for (const term of searchTerms) {
+        const datos = await GetFetchPokedex(term);
+        console.log(datos)
+        datos.map(element => {
+            createCardsPokemons(element);
+        });        
+      }
+    });
+  }
 
 function createCardsPokemons (datos) {
 
@@ -77,6 +91,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
         conteinerPokedex.textContent = ''
         offSet += 19;
         return pokemonId(limite, offSet);
-    })
+    });
+    buscarPokemon()
 })
 
