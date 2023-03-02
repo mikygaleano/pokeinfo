@@ -10,13 +10,15 @@ body {
 header {
     position: fixed;
     width: 100%;
-    border-bottom: solid 2px rgb(234, 234, 10);
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: auto;
     z-index: 2;
-    background-color: blue;
+    background-image: url('./images/pokemon.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 
@@ -28,9 +30,11 @@ nav ul {
     text-decoration: none;
     list-style: none;
 }
-nav li a{
-    text-decoration: none;
-    color: rgb(234, 234, 10);
+
+.iconPokedex {
+    width: 3rem;
+    height: 3rem;
+    background-color: transparent;
 }
 
 header a:nth-child(1){
@@ -59,7 +63,7 @@ header a:nth-child(1){
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    margin: 60px auto 25rem;
+    margin: 80px auto 25rem;
     gap: .5rem;
 }
 
@@ -97,6 +101,9 @@ header a:nth-child(1){
 figure {
     z-index: 1;
 }
+figure > img {
+    width: 10rem;
+}
 
 .conteiner-btn {
     justify-self: center;
@@ -116,6 +123,13 @@ figure {
     padding: .5rem;
     background-color: black;
     color: white;
+}
+
+/*section movies*/
+
+.section-movies {
+    width: 100%;
+    height: 500px;
 }
 
 @media (max-width: 415px) {
