@@ -76,6 +76,7 @@ function createCardsPokemons (datos) {
     const conteinerCards = document.createElement('div');
     conteinerCards.classList.add('conteinerCards')
     const conteinerInfo = document.createElement('div');
+    conteinerInfo.classList.add('conteiner-info')
     const figureCard = document.createElement('figure');
     const imgCard = document.createElement('img');
     const name = document.createElement('h5');
