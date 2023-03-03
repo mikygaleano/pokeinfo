@@ -11,6 +11,7 @@ let offSet = 1;
 async function GetFetchPokedex (id)  {
     const responsi = await fetch(`${Poke_Api}pokemon/${id}`);
     const datos = await responsi.json();
+    console.log(datos)
     const respcolor = await fetch(`${Poke_Api}pokemon-species/${id}`);
     const datosColor = await respcolor.json();
     const array = [datos, datosColor];
@@ -26,6 +27,26 @@ async function pokemonId (limite, offSet) {
         });
     }
 };
+
+
+function btnPrevie () {
+    previe.addEventListener('click', ()=> {
+        conteinerPokedex.textContent = ''
+        if (offSet != 1) {
+            offSet -= 20;
+        } 
+        return pokemonId(limite, offSet);
+    });
+};
+function btnNext () {
+    next.addEventListener('click', ()=> {
+        conteinerPokedex.textContent = ''
+        offSet += 20;
+        return pokemonId(limite, offSet);
+    });
+    buscarPokemon()
+}
+
 async function buscarPokemon() {
     formBuscar.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -35,16 +56,21 @@ async function buscarPokemon() {
         const searchTerms = searchTerm.split(" ");
         conteinerPokedex.textContent = '';
         for (const term of searchTerms) {
-            const datos = await GetFetchPokedex(term);
-            console.log(datos)
-            datos.map(element => {
-                createCardsPokemons(element);
-        });        
-      }
+            if (term) {
+                const datos = await GetFetchPokedex(term);
+                datos.map(element => {
+                    createCardsPokemons(element);
+                });  
+            }
+            if (term === '') {
+                pokemonId(limite, offSet);
+            }    
+        }
     });
   }
 
 function createCardsPokemons (datos) {
+
 
 
     const conteinerCards = document.createElement('div');
@@ -64,7 +90,7 @@ function createCardsPokemons (datos) {
     conteinerInfo.append(name, type);
 
 
-    imgCard.setAttribute('src', datos[0].sprites['front_default']);
+    imgCard.setAttribute('src', datos[0].sprites.other['official-artwork'].front_default);
     imgCard.setAttribute('alt', datos[0].name);
     figureCard.appendChild(imgCard);
 
@@ -84,18 +110,7 @@ function createCardsPokemons (datos) {
 
 document.addEventListener('DOMContentLoaded', ()=> {
     pokemonId(limite, offSet);
-    previe.addEventListener('click', ()=> {
-        conteinerPokedex.textContent = ''
-        if (offSet != 1) {
-            offSet -= 19;
-        } 
-        return pokemonId(limite, offSet);
-    });
-    next.addEventListener('click', ()=> {
-        conteinerPokedex.textContent = ''
-        offSet += 19;
-        return pokemonId(limite, offSet);
-    });
-    buscarPokemon()
+    btnPrevie();
+    btnNext();
 })
 
