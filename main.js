@@ -56,18 +56,19 @@ async function buscarPokemon() {
         const searchTerms = searchTerm.split(" ");
         conteinerPokedex.textContent = '';
         for (const term of searchTerms) {
+            const datos = await GetFetchPokedex(term);
             if (term) {
-                const datos = await GetFetchPokedex(term);
                 datos.map(element => {
                     createCardsPokemons(element);
                 });  
             }
-            if (term === '') {
+            else {
                 pokemonId(limite, offSet);
-            }    
+            }
         }
     });
   }
+
 
 function createCardsPokemons (datos) {
 
@@ -99,10 +100,12 @@ function createCardsPokemons (datos) {
 
     conteinerCards.append(number, figureCard, conteinerInfo)
 
+    conteinerCards.style.backgroundColor = datos[1].color.name;
+
+
     conteinerPokedex.appendChild(conteinerCards);
 
     
-    conteinerCards.style.backgroundColor = datos[1].color.name;
     
 
 };
