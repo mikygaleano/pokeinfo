@@ -13,10 +13,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(4, 194, 251);
-    background-image: url('./images/background-pokebola.jpg');
-    background-position:right;
-    background-size: cover;
+    background-color: black;
 }
 
 .formBuscar {
@@ -115,7 +112,11 @@ figure > img {
 
 
 
-
+footer {
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
 
 
 
